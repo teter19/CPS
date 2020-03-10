@@ -1,0 +1,47 @@
+sample_rate, data = wavfile.read('epicsaxguy.wav')
+amount_of_samples = len(data)
+time = np.arange(0, float(amount_of_samples), 1)/sample_rate
+
+data1=data[500:2000,0]
+mz1=np.where(data1==0)[0]
+#amount_of_samples1 = len(data1)
+#time1 = np.arange(0, float(amount_of_samples1), 1)/sample_rate
+#mz1=np.roots(data1)
+#print(mz1)
+#x=np.roots(data1)
+#x=x.real
+#print(x)
+#roots = np.roots(data1)
+#roots = np.real(roots[np.isreal(roots)])
+#print(roots)
+
+data2=data[500:2000,1]
+mz2=np.where(data2==0)[0]
+#amount_of_samples2 = len(data2)
+#time2 = np.arange(0, float(amount_of_samples2), 1)/sample_rate
+#mz2=np.roots(data2)
+
+fig, axes = plt.subplots(3, 1, figsize=(10,8))
+
+axes[0].plot(data[:,0], 'b', data[:,1], 'g')
+axes[0].set_title("audio")
+axes[0].set_xlabel("x")
+axes[0].set_ylabel("y")
+
+axes[1].plot(data1, 'b')
+axes[1].plot(mz1, np.zeros(len(mz1)), 'r.')
+axes[1].set_title("audio1")
+axes[1].set_xlabel("x")
+axes[1].set_ylabel("y")
+axes[1].set_xlim(500)
+
+axes[2].plot(data2, 'g')
+axes[2].plot(mz2, np.zeros(len(mz2)), 'r.')
+axes[2].set_title("audio2")
+axes[2].set_xlabel("x")
+axes[2].set_ylabel("y")
+axes[2].set_xlim(500)
+#axes[0].plot(time, data[:,0], 'b',time, data[:,1], 'g')
+#axes[1].plot(time1, data1, 'b')
+#axes[2].plot(time2, data2, 'g')
+fig.tight_layout()
